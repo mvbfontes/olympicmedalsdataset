@@ -1,0 +1,11 @@
+let
+    Source = {2012,2008,2004,2000,1996,1992,1988,1984,1980,1976,1972,1968,1964,1960,1956,1952,1948,1936,1932,1928,1924,1920,1912,1908,1904,1900,1896},
+    #"Converted to Table" = Table.FromList(Source, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+    #"Renamed Columns" = Table.RenameColumns(#"Converted to Table",{{"Column1", "Year"}}),
+    #"Added Custom" = Table.AddColumn(#"Renamed Columns", "Custom", each GetData([Year])),
+    #"Expanded Custom" = Table.ExpandTableColumn(#"Added Custom", "Custom", {"Rk", "Country", "Gold", "Silver", "Bronze", "Total"}, {"Rk", "Country", "Gold", "Silver", "Bronze", "Total"}),
+    #"Changed Type" = Table.TransformColumnTypes(#"Expanded Custom",{{"Year", type text}}),
+    #"Added Custom1" = Table.AddColumn(#"Changed Type", "Data", each [Year] & "-01-01"),
+    #"Removed Columns" = Table.RemoveColumns(#"Added Custom1",{"Rk"})
+in
+    #"Removed Columns"

@@ -1,0 +1,10 @@
+let
+    #"Table 0" = (year as number) as table =>
+let
+    Source = Web.Page(Web.Contents("http://www.sports-reference.com/olympics/summer/"& Number.ToText(year) &"")),
+    Data0 = Source{0}[Data],
+    #"Changed Type" = Table.TransformColumnTypes(Data0,{{"Rk", Int64.Type}, {"Country", type text}, {"Gold", Int64.Type}, {"Silver", Int64.Type}, {"Bronze", Int64.Type}, {"Total", Int64.Type}})
+in
+    #"Changed Type"
+in
+    #"Table 0"
