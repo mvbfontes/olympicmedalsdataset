@@ -1,0 +1,16 @@
+let
+    Source = Web.Page(Web.Contents("https://en.wikipedia.org/wiki/2016_Summer_Olympics_medal_table#Medal_table")),
+    Data0 = Source{0}[Data],
+    #"Changed Type" = Table.TransformColumnTypes(Data0,{{"Rank", Int64.Type}, {"NOC", type text}, {"Gold", Int64.Type}, {"Silver", Int64.Type}, {"Bronze", Int64.Type}, {"Total", Int64.Type}}),
+    #"Split Column by Delimiter" = Table.SplitColumn(#"Changed Type","NOC",Splitter.SplitTextByEachDelimiter({"("}, null, false),{"NOC.1", "NOC.2"}),
+    #"Changed Type1" = Table.TransformColumnTypes(#"Split Column by Delimiter",{{"NOC.1", type text}, {"NOC.2", type text}}),
+    #"Removed Columns" = Table.RemoveColumns(#"Changed Type1",{"NOC.2"}),
+    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"NOC.1", "Country"}}),
+    #"Added Custom" = Table.AddColumn(#"Renamed Columns", "Year", each 2016),
+    #"Added Custom1" = Table.AddColumn(#"Added Custom", "Data", each "2016-01-01"),
+    #"Removed Columns1" = Table.RemoveColumns(#"Added Custom1",{"Rank"}),
+    #"Reordered Columns" = Table.ReorderColumns(#"Removed Columns1",{"Year", "Country", "Gold", "Silver", "Bronze", "Total", "Data"}),
+    #"Changed Type2" = Table.TransformColumnTypes(#"Reordered Columns",{{"Year", type text}}),
+    #"Appended Query" = Table.Combine({#"Changed Type2",Medalhas})
+in
+    #"Appended Query"
