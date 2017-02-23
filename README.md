@@ -1,5 +1,10 @@
 # olympicmedalsdataset
 
-Scripts do Power Query (Excel ou Power BI Desktop) para ler dados de múltiplas páginas web que possuem informações das medalhas conquistadas pelos países na história das Olimpíadas.
+Scripts do Power Query (Excel ou Power BI Desktop) para ler dados de mÃºltiplas pÃ¡ginas web que possuem informaÃ§Ãµes das medalhas conquistadas pelos paÃ­ses na histÃ³ria das OlimpÃ­adas.
 
-Script em R para criar gráficos de projeção de medalhas dos países nas próximas Olimpíadas.
+Script em R para criar grÃ¡ficos de projeÃ§Ã£o de medalhas dos paÃ­ses nas prÃ³ximas OlimpÃ­adas.
+
+ReferÃªncias:
+
+Parte 1: https://dataficacao.wordpress.com/2016/08/24/dados-medalhas-olimpiadas-web-powerquery-powerbi/
+Parte 2: https://dataficacao.wordpress.com/2016/08/26/graficos-forecast-r-previsao-olimpiadas/
